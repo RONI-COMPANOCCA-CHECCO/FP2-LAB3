@@ -28,8 +28,8 @@
 <tr><th colspan="6">INFORMACIÓN BÁSICA</th></tr>
 </theader>
 <tbody>
-<tr><td>ASIGNATURA:</td><td colspan="5">Fundamentos de programación</td></tr>
-<tr><td>TÍTULO DE LA PRÁCTICA:</td><td colspan="5">Relaciones de uno a muchos, muchos a muchos y impresion de pdf y emails en django</td></tr>
+<tr><td>ASIGNATURA:</td><td colspan="5">Fundamentos de programación II</td></tr>
+<tr><td>TÍTULO DE LA PRÁCTICA:</td><td colspan="5">Arreglos de Objetos</td></tr>
 <tr>
 <td>NÚMERO DE PRÁCTICA:</td><td>03</td><td>AÑO LECTIVO:</td><td>2023 - B</td><td>NRO. SEMESTRE:</td><td>II</td>
 </tr>
@@ -68,7 +68,7 @@
 [![Java][Java]][java-site]
 <div align="center">
 
-# **BIENVENIDOS A PROGRAMACIÓN 2 - LABORATORIO**
+# **BIENVENIDOS A FUNDAMENTOS DE PROGRAMACIÓN 2 - LABORATORIO**
 
 <a href="https://ibb.co/3NxfBVF"><img src="https://i.ibb.co/Yk5DpJd/sistemas.jpg" alt="sistemas" border="0"></a>
 
