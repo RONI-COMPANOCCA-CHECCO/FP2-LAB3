@@ -31,7 +31,7 @@
 <tr><td>ASIGNATURA:</td><td colspan="5">Fundamentos de programación</td></tr>
 <tr><td>TÍTULO DE LA PRÁCTICA:</td><td colspan="5">Relaciones de uno a muchos, muchos a muchos y impresion de pdf y emails en django</td></tr>
 <tr>
-<td>NÚMERO DE PRÁCTICA:</td><td>03</td><td>AÑO LECTIVO:</td><td>2023 A</td><td>NRO. SEMESTRE:</td><td>II</td>
+<td>NÚMERO DE PRÁCTICA:</td><td>03</td><td>AÑO LECTIVO:</td><td>2023 - B</td><td>NRO. SEMESTRE:</td><td>II</td>
 </tr>
 </<tr>
 <tr><td colspan="6">DOCENTE:
@@ -68,12 +68,13 @@
 [![Java][Java]][java-site]
 <div align="center">
 
-# BIENVENIDOS A PROGRAMACIÓN 2 - LABORATORIO
+# **BIENVENIDOS A PROGRAMACIÓN 2 - LABORATORIO**
 
-</div>
-
+<a href="https://ibb.co/3NxfBVF"><img src="https://i.ibb.co/Yk5DpJd/sistemas.jpg" alt="sistemas" border="0"></a>
 
 ## La tecnología Java permite acceder a las aplicaciones basadas en la web desde cualquier lugar. Los desarrolladores de Java prueban estas aplicaciones para todos los navegadores web posibles, lo que hace que puedan ejecutarse fácilmente en cualquier sistema operativo posible como Windows, Mac y Linux.
+
+</div>
 
 [license]: https://img.shields.io/github/license/rescobedoq/pw2?label=rescobedoq
 [license-file]: https://github.com/rescobedoq/pw2/blob/main/LICENSE
