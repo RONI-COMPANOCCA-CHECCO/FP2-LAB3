@@ -28,7 +28,7 @@
 <tr><th colspan="6">INFORMACIÓN BÁSICA</th></tr>
 </theader>
 <tbody>
-<tr><td>ASIGNATURA:</td><td colspan="5">.                                      Fundamentos de programación II                                                  .</td></tr>
+<tr><td>ASIGNATURA:</td><td colspan="5">Fundamentos de programación II - Laboratorio - F - arreglos orientados a Objetos</td></tr>
 <tr><td>TÍTULO DE LA PRÁCTICA:</td><td colspan="5">Arreglos de Objetos</td></tr>
 <tr>
 <td>NÚMERO DE PRÁCTICA:</td><td>03</td><td>AÑO LECTIVO:</td><td>2023 - B</td><td>NRO. SEMESTRE:</td><td>II</td>
