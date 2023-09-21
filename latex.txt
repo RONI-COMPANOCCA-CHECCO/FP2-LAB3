@@ -47,10 +47,10 @@
 \newcommand{\itemDepartment}{Departamento Académico de Ingeniería de Sistemas e Informática}
 \newcommand{\itemSchool}{Escuela Profesional de Ingeniería de Sistemas}
 \newcommand{\itemAcademic}{2023 - B}
-\newcommand{\itemInput}{Del 12 Septiembre 2023}
-\newcommand{\itemOutput}{Al 13 Septiembre 2023}
-\newcommand{\itemPracticeNumber}{02}
-\newcommand{\itemTheme}{Arreglos}
+\newcommand{\itemInput}{Del 19 Septiembre 2023}
+\newcommand{\itemOutput}{Al 20 Septiembre 2023}
+\newcommand{\itemPracticeNumber}{03}
+\newcommand{\itemTheme}{Arreglos de Objetos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -160,11 +160,28 @@
 
     \section{TAREA}
 	\begin{itemize}	
-		\item Crear e inicializar arreglos
-		\item Uso del atributo length de arreglos
-		\item Copiar valores de un arreglo a otro mediante System.arraycopy()
-        \item Crear métodos que reciban arreglos como parámetros
-        \item Valorar el uso de arreglos estándar frente a las variables simples
+    \subsection{Objetivos:}
+		\item Crear e inicializar arreglos de objetos
+		\item Solucionar problemas
+    \subsection{Competencias a alcanzar:}
+		\item Diseña, responsablemente, sistemas, componentes o procesos para satisfacer necesidades dentro de restricciones realistas: económicas, medio ambientales, sociales, políticas, éticas, de salud, de seguridad, manufacturación y sostenibilidad.
+        \item Aplica de forma flexible, técnicas, métodos, principios, normas, estándares y herramientas de ingeniería necesarias para la construcción de software e implementación de sistemas de información.
+    \subsection{Consideraciones de evaluacion:}
+        \item No deberá utilizar constructores no vistos en clase
+        \item No podrá modificar el código base entregado para este laboratorio
+        \item Deberá utilizar nombre de variables significativos
+        \item Deberá realizar pruebas adicionales
+        \item El alumno deberá indicar en su código con quien colaboró
+        \item El alumno será requerido de realizar modificaciones en su código y responder a preguntas sobre el mismo
+        \item Todos los ejercicios deberán traerse terminados en caso de ser tarea para la casa
+        \item Si tiene ejercicios sin terminar no importa, se revisará el avance y se discutirá sobre las dificultades encontradas.
+    \subsection{Indicaciones generales:}
+        \item Todos los ejercicios deberán ser guardados en el mismo Proyecto
+        \item El Proyecto deberá tener el nombre del Laboratorio y el nombre del alumno, así por ejemplo: Laboratorio 1 – Juan Perez
+        \item Cada Clase deberá tener el nombre del ejercicio, así por ejemplo: Ejercicio1
+        \item Utilice nombres de variables significativos y todas las recomendaciones de estilo
+        \item Especialmente, su código deberá estar correctamente indentado
+        \item Deberá pasar TODOS los casos de prueba
 	\end{itemize}
 
     \section{EQUIPOS, MATERIALES Y TEMAS UTILIZADOS}
@@ -182,19 +199,162 @@
 		\item URL para el laboratorio 02 en el Repositorio GitHub.	
         \item \url{https://github.com/RONI-COMPANOCCA-CHECCO/FP2-LAB3}
 	\end{itemize}
- 
-    
     
     \section{ACTIVIDADES}
 	\begin{itemize}
-		\item JUEGO DEL AHORCADO
-		\item En este ejercicio se le solicita a usted implementar el juego del ahorcado utilizando el código parcial que se le entrega.
-		\item Deberá considerar que:
-        \item El juego valida el ingreso de letras solamente. En caso el usuario ingrese un carácter equivocado le dará el mensaje de error y volverá a solicitar el ingreso
-        \item El juego supone que el usuario no ingresa una letra ingresada previamente
-        \item El método ingreseLetra() debe ser modificado para incluir las consideraciones de validación
-        \item Puede crear métodos adicionales
-        \subsection{CODIGO}
+        \subsection{EJERCICIO RESUELTO}
+		\item En una empresa paga a sus vendedores comisiones de acuerdo con los montos de ventas mensuales en base a la siguiente escala:
+    \begin{lstlisting}[language=bash]
+        MONTO VENTAS         COMISIÓN %
+        > 2001                     12
+        menos 2000                 10
+    \end{lstlisting}
+        La empresa cuenta con “N” Vendedores y se desea calcular el total de los sueldos por cada tipo de comisión y el total a desembolsar por la empresa. Finalidad: Mostrar los sueldos (sueldo base + comisión) de los N vendedores
+        \item Primero crearemos la Clase Vendedor dentro del Package Libreria.
+        \begin{lstlisting}[language=java]
+// RONI COMPANOCCA CHECCO
+// CUI: 20210558
+// LABORATORIO 03
+// FUNDAMENTOS DE PROGRAMACION 
+import java.util.*;
+
+public class Vendedor{
+    //ATRIBUTOS
+    private String nombre;
+    private double sueldoBase;
+    private double comision;
+    private double sueldoFinal;
+    private double montoVenta;
+    private double porcentajeComision;
+    //CONSTRUCTORES
+    public Vendedor(){
+        this.nombre = "";
+        this.sueldoBase = 0.00;
+        this.comision = 0.00;
+        this.sueldoFinal = 0.00;
+    }
+
+    public Vendedor(String nombre, double sueldoBase, double montoVenta){
+        this.nombre = nombre;
+        this.sueldoBase = sueldoBase;
+        this.montoVenta = montoVenta;
+    }
+    // METODOS PUBLICOS
+    private void calcularComision(){
+        if(this.montoVenta < 2000){
+            this.porcentajeComision = 10;
+            this.comision = this.montoVenta * (this.porcentajeComision/100);
+        }else{
+            if(this.montoVenta >= 2001){
+                this.porcentajeComision = 12;
+                this.comision = this.montoVenta * (this.porcentajeComision/100);
+            }
+        }
+    }
+    public void calcularSueldoFinal(){
+        this.calcularComision();
+        this.sueldoFinal = this.sueldoBase + comision;
+    }
+    public String ToString(){
+        StringBuilder abMensaje = new StringBuilder();
+        abMensaje.append("-------------\nDATOS DEL VENDEDOR\n-----------");
+        abMensaje.append("\nNombre: "+nombre);
+        abMensaje.append("\nSueldo Base: "+sueldoBase);
+        abMensaje.append("\nMonto Venta: "+montoVenta);
+        abMensaje.append("\nComision: "+comision);
+        abMensaje.append("\nSueldo Final: "+sueldoFinal);
+
+        return abMensaje.toString();
+    }
+}
+        \end{lstlisting}
+		\item Segundo: Dentro de la clase Main, crearemos un Arreglo de objetos Vendedor. Luego desarrollamos el método para Crear Objetos Vendedor y agregarlos al Arreglo de objetos. Por último, tendremos el método para recorrer el arreglo e imprimir los datos de los objetos vendedores.
+        \begin{lstlisting}[language=java]
+import java.util.Scanner;
+public class Main {
+    private static Scanner consola = new Scanner (System.in);
+    private static Vendedor objVendedor;
+    private static final int N = 3;
+    private static Vendedor [] listaVendedores = new Vendedor[N];
+    private static int posicion = 0;
+
+    private static void crearVendedores(){
+        for(int i=0; i<listaVendedores.length; i++){
+            String nombre;
+            double sueldoBase, montoVentas;
+            System.out.println("Ingrese el Nombre: ");
+            nombre = consola.next();
+            System.out.println("Ingrese el Sueldo: ");
+            sueldoBase = consola.nextDouble();
+            System.out.println("Ingrese el Monto de Ventas: ");
+            montoVentas = consola.nextDouble();
+            //CREAMOS INSTANCIA Y LE PASAMOS LOS DATOS
+            objVendedor = new Vendedor(nombre, sueldoBase, montoVentas);
+            objVendedor.calcularSueldoFinal();
+            //AGREGAMOS OBJETO AL ARREGLO DE OBJETOS
+            listaVendedores[i] = objVendedor;
+        }
+    }
+
+    private static void imprimirVendedores(){
+        for(int con = 0; con < listaVendedores.length; con++){
+            Vendedor objVendedor1 = listaVendedores[con];
+            System.out.println(objVendedor1.ToString());
+        }
+    }
+    public static void main(String[] args){
+        crearVendedores();
+        imprimirVendedores();
+    }
+}
+        \end{lstlisting}
+        \item Ejecucion
+        \begin{lstlisting}[language=java]
+Ingrese el Nombre: 
+Roni
+Ingrese el Sueldo: 
+20
+Ingrese el Monto de Ventas: 
+34
+Ingrese el Nombre: 
+Reyna
+Ingrese el Sueldo: 
+1000
+Ingrese el Monto de Ventas: 
+45
+Ingrese el Nombre: 
+Walter
+Ingrese el Sueldo: 
+2300
+Ingrese el Monto de Ventas: 
+50
+-------------
+DATOS DEL VENDEDOR
+-----------
+Nombre: Roni
+Sueldo Base: 20.0
+Monto Venta: 34.0
+Comision: 3.4000000000000004
+Sueldo Final: 23.4
+-------------
+DATOS DEL VENDEDOR
+-----------
+Nombre: Reyna
+Sueldo Base: 1000.0
+Monto Venta: 45.0
+Comision: 4.5
+Sueldo Final: 1004.5
+-------------
+DATOS DEL VENDEDOR
+-----------
+Nombre: Walter
+Sueldo Base: 2300.0
+Monto Venta: 50.0
+Comision: 5.0
+Sueldo Final: 2305.0
+        \end{lstlisting}
+
+        \subsection{EJERCICIO PROPUESTO}
         \begin{lstlisting}[language=java]
 // RONI COMPANOCCA CHECCO
 // CUI: 20210558
@@ -216,9 +376,9 @@
  
     \section{CUESTIONARIO}
 	\begin{itemize}
-		\item ¿Se pueden clonar los arreglos? Explique 2 formas.
-		\item ¿Qué ventajas tiene el uso de los arreglos?
-		\item Investigue la clase Arrays y describa 3 métodos importantes que ofrece dicha clase. (fuera de los vistos en el marco conceptual)	
+		\item ¿Qué ventajas tienen los arreglos de objetos sobre los arreglos estándar?
+		\item ¿Cómo debe inicializarse un arreglo de objetos?
+		\item ¿Cuándo deberíamos usar los arreglos de objetos?	
 	\end{itemize}
 	
 	\section{REFERENCIAS}
