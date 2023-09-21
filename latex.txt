@@ -355,23 +355,283 @@ Sueldo Final: 2305.0
         \end{lstlisting}
 
         \subsection{EJERCICIO PROPUESTO}
+        \item la clase DemoBatalla.java
         \begin{lstlisting}[language=java]
-// RONI COMPANOCCA CHECCO
+        // RONI COMPANOCCA CHECCO
 // CUI: 20210558
-// LABORATORIO 01
+// LABORATORIO 03
 // FUNDAMENTOS DE PROGRAMACION 
- for(int i=0;i<progreso.length();i++) {
-	if(!progreso.substring(i, i+1).equals("_")) {
-		if(i==progreso.length()-1) {
-		    System.out.println("Ganaste!");
-		    System.out.println("Número de intentos: "+contador);
-		    System.exit(0);
-		}
-	}else {
-		break;
-	}
- }
-    \end{lstlisting}
+import java.util.*;
+
+public class DemoBatalla {
+    public static void main(String[] args) {
+        Nave[] misNaves = new Nave[10];
+        Scanner sc = new Scanner(System.in);
+        String nomb, col;
+        int fil, punt;
+        boolean est;
+        
+        for (int i = 0; i < misNaves.length; i++) {
+            System.out.println("Nave " + (i + 1));
+            System.out.print("Nombre: ");
+            nomb = sc.next();
+            System.out.print("Fila: ");
+            fil = sc.nextInt();
+            System.out.print("Columna: ");
+            col = sc.next();
+            System.out.print("Estado: ");
+            est = sc.nextBoolean();
+            System.out.print("Puntos: ");
+            punt = sc.nextInt();
+            
+            misNaves[i] = new Nave();
+            //Se crea un objeto Nave y se asigna su referencia a misNaves
+            misNaves[i].setNombre(nomb);
+            misNaves[i].setFila(fil);
+            misNaves[i].setColumna(col);
+            misNaves[i].setEstado(est);
+            misNaves[i].setPuntos(punt);
+        }
+        
+        System.out.println("\nNaves creadas:");
+        mostrarNaves(misNaves);
+        
+        System.out.print("\nIngrese un nombre para mostrar todas las naves con ese nombre: ");
+        String BuscarPorNombre = sc.next();
+        mostrarPorNombre(misNaves, BuscarPorNombre);
+        
+        System.out.print("\nIngrese el numero de puntos para mostrar naves que tengan puntos iguales o menores: ");
+        int BuscarPorPuntos = sc.nextInt();
+        mostrarPorPuntos(misNaves, BuscarPorPuntos);
+        
+        Nave naveMayorPuntos = mostrarMayorPuntos(misNaves);
+        System.out.println("\nNave con mayor numero de puntos: " + naveMayorPuntos);
+        
+        Nave[] navesDesordenadas = NavesDesordenadas(misNaves);
+        System.out.println("\nla lista de naves desordenadas es: ");
+        mostrarNaves(navesDesordenadas);
+    }
+    
+    // Método para mostrar todas las naves
+    public static void mostrarNaves(Nave[] flota) {
+        for (Nave nave : flota) {
+            System.out.println(nave);
+        }
+    }
+    
+    // Método para mostrar todas las naves de un nombre que se pide por teclado
+    public static void mostrarPorNombre(Nave[] flota, String BuscarPorNombre) {
+        for (Nave nave : flota) {
+            if (nave.getNombre().equalsIgnoreCase(BuscarPorNombre)) {
+                System.out.println(nave);
+            }
+        }
+    }
+    
+    // Método para mostrar todas las naves con un número de puntos inferior o igual
+    // al número de puntos que se pide por teclado
+    public static void mostrarPorPuntos(Nave[] flota, int BuscarPorPuntos) {
+        for (Nave nave : flota) {
+            if (nave.getPuntos() <= BuscarPorPuntos) {
+                System.out.println(nave);
+            }
+        }
+    }
+    
+    // Método que devuelve la Nave con mayor número de Puntos
+    public static Nave mostrarMayorPuntos(Nave[] flota) {
+        Nave mayorPuntos = null;
+        int maxPuntos = Integer.MIN_VALUE;
+        
+        for (Nave nave : flota) {
+            if (nave.getPuntos() > maxPuntos) {
+                maxPuntos = nave.getPuntos();
+                mayorPuntos = nave;
+            }
+        }
+        
+        return mayorPuntos;
+    }
+    
+    // Crear un método que devuelva un nuevo arreglo de objetos con todos los objetos previamente ingresados
+    // pero aleatoriamente desordenados
+    public static Nave[] NavesDesordenadas(Nave[] flota) {
+        Nave[] navesDesordenadas = Arrays.copyOf(flota, flota.length); // Crear una copia del arreglo original
+        Random random = new Random();
+    
+        // Realizar una permutación aleatoria del arreglo
+        for (int i = navesDesordenadas.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            Nave aux = navesDesordenadas[i];
+            navesDesordenadas[i] = navesDesordenadas[j];
+            navesDesordenadas[j] = aux;
+        }
+    
+        return navesDesordenadas;
+    }
+}
+
+        \end{lstlisting}
+
+        \item la clase Nave.java
+        \begin{lstlisting}[language=java]
+public class Nave {
+    private String nombre;
+    private int fila;
+    private String columna;
+    private boolean estado;
+    private int puntos;
+
+    // METODOS MUTADORES
+    public void setNombre(String n) {
+        nombre = n;
+    }
+
+    public void setFila(int f) {
+        fila = f;
+    }
+
+    public void setColumna(String c) {
+        columna = c;
+    }
+
+    public void setEstado(boolean e) {
+        estado = e;
+    }
+
+    public void setPuntos(int p) {
+        puntos = p;
+    }
+
+    // METODOS ACCESORES
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public String getColumna() {
+        return columna;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public String toString() {
+        return "Nave [nombre=" + nombre + ", fila=" + fila + ", columna=" + columna + ", estado=" + estado + ", puntos=" + puntos + "]";
+    }
+}
+         \end{lstlisting}
+
+         \item Ejecucion
+        \begin{lstlisting}[language=java]
+Nave 1
+Nombre: Huascar
+Fila: 1
+Columna: 1
+Estado: TRUE
+Puntos: 3
+Nave 2
+Nombre: Atlantis
+Fila: 2
+Columna: 2
+Estado: TRUE
+Puntos: 4
+Nave 3
+Nombre: Discovery
+Fila: 3
+Columna: 3
+Estado: TRUE
+Puntos: 3
+Nave 4
+Nombre: EnterPrice
+Fila: 3
+Columna: 2
+Estado: TRUE
+Puntos: 5
+Nave 5
+Nombre: Galactica
+Fila: 4
+Columna: 4
+Estado: TRUE
+Puntos: 4
+Nave 6
+Nombre: Halcon
+Fila: 5
+Columna: 5
+Estado: FALSE
+Puntos: 4
+Nave 7
+Nombre: Estrella
+Fila: 6
+Columna: 6
+Estado: TRUE
+Puntos: 3
+Nave 8
+Nombre: Moya
+Fila: 7
+Columna: 7
+Estado: TRUE
+Puntos: 5
+Nave 9
+Nombre: Odiseus
+Fila: 8
+Columna: 8
+Estado: TRUE
+Puntos: 4
+Nave 10
+Nombre: Rama
+Fila: 9
+Columna: 9
+Estado: TRUE
+Puntos: 3
+
+Naves creadas:
+Nave [nombre=Huascar, fila=1, columna=1, estado=true, puntos=3]
+Nave [nombre=Atlantis, fila=2, columna=2, estado=true, puntos=4]
+Nave [nombre=Discovery, fila=3, columna=3, estado=true, puntos=3]
+Nave [nombre=EnterPrice, fila=3, columna=2, estado=true, puntos=5]
+Nave [nombre=Galactica, fila=4, columna=4, estado=true, puntos=4]
+Nave [nombre=Halcon, fila=5, columna=5, estado=false, puntos=4]
+Nave [nombre=Estrella, fila=6, columna=6, estado=true, puntos=3]
+Nave [nombre=Moya, fila=7, columna=7, estado=true, puntos=5]
+Nave [nombre=Odiseus, fila=8, columna=8, estado=true, puntos=4]
+Nave [nombre=Rama, fila=9, columna=9, estado=true, puntos=3]
+
+Ingrese un nombre para mostrar todas las naves con ese nombre: Rama
+Nave [nombre=Rama, fila=9, columna=9, estado=true, puntos=3]
+
+Ingrese el numero de puntos para mostrar naves que tengan puntos iguales o menores: 4
+Nave [nombre=Huascar, fila=1, columna=1, estado=true, puntos=3]
+Nave [nombre=Atlantis, fila=2, columna=2, estado=true, puntos=4]
+Nave [nombre=Discovery, fila=3, columna=3, estado=true, puntos=3]
+Nave [nombre=Galactica, fila=4, columna=4, estado=true, puntos=4]
+Nave [nombre=Halcon, fila=5, columna=5, estado=false, puntos=4]
+Nave [nombre=Estrella, fila=6, columna=6, estado=true, puntos=3]
+Nave [nombre=Odiseus, fila=8, columna=8, estado=true, puntos=4]
+Nave [nombre=Rama, fila=9, columna=9, estado=true, puntos=3]
+
+Nave con mayor numero de puntos: Nave [nombre=EnterPrice, fila=3, columna=2, estado=true, puntos=5]
+
+la lista de naves desordenadas es:
+Nave [nombre=Odiseus, fila=8, columna=8, estado=true, puntos=4]
+Nave [nombre=Estrella, fila=6, columna=6, estado=true, puntos=3]
+Nave [nombre=Halcon, fila=5, columna=5, estado=false, puntos=4]
+Nave [nombre=Rama, fila=9, columna=9, estado=true, puntos=3]
+Nave [nombre=Discovery, fila=3, columna=3, estado=true, puntos=3]
+Nave [nombre=Atlantis, fila=2, columna=2, estado=true, puntos=4]
+Nave [nombre=Galactica, fila=4, columna=4, estado=true, puntos=4]
+Nave [nombre=Moya, fila=7, columna=7, estado=true, puntos=5]
+Nave [nombre=Huascar, fila=1, columna=1, estado=true, puntos=3]
+Nave [nombre=EnterPrice, fila=3, columna=2, estado=true, puntos=5]
+         \end{lstlisting}
     
     \subsection{SOLUCIONAR LA ACTIVIDAD 4 DE LA PRACTICA 1 PERO USANDO ARREGLOS DE OBJETOS}
     
