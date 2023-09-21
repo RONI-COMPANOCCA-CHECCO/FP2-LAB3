@@ -372,13 +372,249 @@ Sueldo Final: 2305.0
 	}
  }
     \end{lstlisting}
+    
+    \subsection{SOLUCIONAR LA ACTIVIDAD 4 DE LA PRACTICA 1 PERO USANDO ARREGLOS DE OBJETOS}
+    
+    \item Clase menu
+    \begin{lstlisting}[language=java]
+// RONI COMPANOCCA CHECCO
+// CUI: 20210558
+// LABORATORIO 03
+// FUNDAMENTOS DE PROGRAMACION 
+import java.util.Scanner;
+public class Menu {
+    private static Scanner consola = new Scanner (System.in);
+    private static Soldado objSoldado;
+    private static final int N = 5;
+    private static Soldado [] soldadito = new Soldado[N];
+
+    private static void crearSoldados(){
+        for(int i=0; i<soldadito.length; i++){
+            String nombre;
+            int nivelVida;
+            System.out.println("Ingrese el Nombre: ");
+            nombre = consola.next();
+            System.out.println("Ingrese el nivel de Vida: ");
+            nivelVida = consola.nextInt();
+            //CREAMOS INSTANCIA Y LE PASAMOS LOS DATOS
+            objSoldado = new Soldado(nombre, nivelVida);
+            //AGREGAMOS OBJETO AL ARREGLO DE OBJETOS
+            soldadito[i] = objSoldado;
+        }
+    }
+
+    private static void imprimirSoldados(){
+        for(int con = 0; con < soldadito.length; con++){
+            Soldado objSoldado1 = soldadito[con];
+            System.out.println(objSoldado1.ToString());
+        }
+    }
+    public static void main(String[] args){
+        crearSoldados();
+        imprimirSoldados();
+    }
+}
+    \end{lstlisting}
+
+    \item Clase Soldado
+    \begin{lstlisting}[language=java]
+import java.util.*;
+
+public class Soldado{
+    //ATRIBUTOS
+    private String nombre;
+    private int nivelVida;
+    //CONSTRUCTORES
+    public Soldado(){
+        this.nombre = "";
+        this.nivelVida = 0;
+    }
+
+    public Soldado(String nombre, int nivelVida){
+        this.nombre = nombre;
+        this.nivelVida = nivelVida;
+    }
+
+    public String ToString(){
+        StringBuilder abMensaje = new StringBuilder();
+        abMensaje.append("-------------\nDATOS DEL SOLDADO\n-----------");
+        abMensaje.append("\nNombre: "+nombre);
+        abMensaje.append("\nNivel de vida: "+nivelVida);
+
+        return abMensaje.toString();
+    }
+}
+    \end{lstlisting}
+    
+    \item Ejecucion
+    \begin{lstlisting}[language=java]
+Ingrese el Nombre:
+roni
+Ingrese el nivel de Vida:
+3
+Ingrese el Nombre:
+jesus
+Ingrese el nivel de Vida:
+3
+Ingrese el Nombre:
+raton
+Ingrese el nivel de Vida:
+4
+Ingrese el Nombre:
+simos
+Ingrese el nivel de Vida:
+5
+Ingrese el Nombre:
+pedro
+Ingrese el nivel de Vida:
+4
+-------------
+DATOS DEL SOLDADO
+-----------
+Nombre: roni
+Nivel de vida: 3
+-------------
+DATOS DEL SOLDADO
+-----------
+Nombre: jesus
+Nivel de vida: 3
+-------------
+DATOS DEL SOLDADO
+-----------
+Nombre: raton
+Nivel de vida: 4
+-------------
+DATOS DEL SOLDADO
+-----------
+Nombre: simos
+Nivel de vida: 5
+-------------
+DATOS DEL SOLDADO
+-----------
+Nombre: pedro
+Nivel de vida: 4
+        \end{lstlisting}
+    
+    \subsection{SOLUCIONAR LA ACTIVIDAD 5 DE LA PRACTICA 1 PERO USANDO ARREGLOS DE OBJETOS}
+
+    \item Menu de la batalla
+    \begin{lstlisting}[language=java]
+// RONI COMPANOCCA CHECCO
+// CUI: 20210558
+// LABORATORIO 03
+// FUNDAMENTOS DE PROGRAMACION 
+import java.util.Random;
+
+public class EjercitoMenu {
+    public static void main(String[] args) {
+        Random aleatorio = new Random();
+
+        // Crear dos ejércitos con un número aleatorio de soldados entre 1 y 5
+        int Ejercito1 = aleatorio.nextInt(5) + 1;
+        int Ejercito2 = aleatorio.nextInt(5) + 1;
+
+        Ejercito ejercito1 = new Ejercito(Ejercito1);
+        Ejercito ejercito2 = new Ejercito(Ejercito2);
+
+        // Mostrar los datos de ambos ejércitos
+        System.out.println("Ejército 1:");
+        mostrarEjercito(ejercito1);
+
+        System.out.println("\nEjército 2:");
+        mostrarEjercito(ejercito2);
+
+        // DETERMINAMOS EL EJERCITO GANADOR
+        int numeroSoldadosEjercito1 = ejercito1.getNumeroDeSoldados();
+        int numeroSoldadosEjercito2 = ejercito2.getNumeroDeSoldados();
+
+        if (numeroSoldadosEjercito1 > numeroSoldadosEjercito2) {
+            System.out.println("\nEl Ejército 1 es el ganador.");
+        } else if (numeroSoldadosEjercito2 > numeroSoldadosEjercito1) {
+            System.out.println("\nEl Ejército 2 es el ganador.");
+        } else {
+            System.out.println("\nLa batalla no tuvo victorioso a ningun ejercito");
+        }
+    }
+
+    public static void mostrarEjercito(Ejercito ejercito) {
+        Soldados[] soldados = ejercito.getSoldados();
+        for (int i = 0; i < soldados.length; i++) {
+            System.out.println("Soldado " + i + ": " + soldados[i].getNombre());
+        }
+    }
+}
+    \end{lstlisting}
+
+    \item La primera clase Soldados
+    \begin{lstlisting}[language=java]
+public class Soldados {
+    private String nombre;
+
+    public Soldados(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+}
+    \end{lstlisting}
+    
+    \item La clase Ejercito
+    \begin{lstlisting}[language=java]
+class Ejercito {
+    private Soldados[] soldado;
+
+    public Ejercito(int numeroSoldados) {
+        soldado = new Soldados[numeroSoldados];
+        for (int i = 0; i < numeroSoldados; i++) {
+            soldado[i] = new Soldados("Soldado" + i);
+        }
+    }
+
+    public Soldados[] getSoldados() {
+        return soldado;
+    }
+
+    public int getNumeroDeSoldados() {
+        return soldado.length;
+    }
+}
+    \end{lstlisting}
+
+    \item Ejecucion
+    \begin{lstlisting}[language=java]
+Ejército 1:
+Soldado 0: Soldado0
+Soldado 1: Soldado1
+Soldado 2: Soldado2
+
+Ejército 2:
+Soldado 0: Soldado0
+Soldado 1: Soldado1
+Soldado 2: Soldado2
+Soldado 3: Soldado3
+Soldado 4: Soldado4
+
+El Ejército 2 es el ganador.
+    \end{lstlisting}
+    
 	\end{itemize}
  
     \section{CUESTIONARIO}
+
 	\begin{itemize}
-		\item ¿Qué ventajas tienen los arreglos de objetos sobre los arreglos estándar?
-		\item ¿Cómo debe inicializarse un arreglo de objetos?
-		\item ¿Cuándo deberíamos usar los arreglos de objetos?	
+		\subsection ¿Qué ventajas tienen los arreglos de objetos sobre los arreglos estándar?
+        \item Capacidad de almacenar valores nulos: Los arreglos de objetos pueden contener elementos nulos (null), lo que significa que puedes tener celdas vacías en un arreglo sin lanzar una excepción. En contraste, los arreglos estándar en muchos lenguajes no permiten elementos nulos, lo que puede ser inconveniente en algunas situaciones.
+		
+  \subsection ¿Cómo debe inicializarse un arreglo de objetos?
+        \item Se debe inicializar de esta forma
+      \begin{lstlisting}[language=java]
+  miArreglo = new MiClase[tamaño];
+    \end{lstlisting}
+
+		\subsection ¿Cuándo deberíamos usar los arreglos de objetos?
+  \item como cuando necesitamos almacenar una colección de objetos relacionados: Los arreglos de objetos son ideales para agrupar objetos que están relacionados entre sí de alguna manera. Por ejemplo, podemos usar un arreglo de objetos "Estudiante" para almacenar información sobre estudiantes en una clase.
 	\end{itemize}
 	
 	\section{REFERENCIAS}
